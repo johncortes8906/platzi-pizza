@@ -67,5 +67,18 @@ public class PizzaController {
         );
     }
 
+    @GetMapping("/available/description={description}")
+    public ResponseEntity<List<PizzaEntity>> findAllByDescription(@PathVariable String description) {
+        return  ResponseEntity.ok(
+                this.pizzaService.findAllByDescription(description)
+        );
+    }
+
+    @GetMapping ("/available/not/description={description}")
+    public ResponseEntity<List<PizzaEntity>> findAllDifferentByDescription(@PathVariable String description) {
+        return ResponseEntity.ok(
+                this.pizzaService.findAllDifferentOfDescription(description)
+        );
+    }
 
 }
