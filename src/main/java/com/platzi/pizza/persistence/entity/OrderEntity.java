@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -23,7 +24,7 @@ public class OrderEntity {
     @Column(name = "customer_id", nullable = false, length = 15)
     private String customerId;
     @Column(nullable = false)
-    private LocalDate date;
+    private LocalDateTime date;
     @Column(nullable = false, columnDefinition = "DECIMAL(6,2)")
     private Double total;
     @Column(nullable = false, columnDefinition = "CHAR(1)")
@@ -37,6 +38,7 @@ public class OrderEntity {
     private CustomerEntity customer;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
+    @OrderBy("price ASC")
     private List<OrderItemEntity> orderItems;
 
 }

@@ -2,6 +2,7 @@ package com.platzi.pizza.web.controller;
 
 import com.platzi.pizza.persistence.entity.PizzaEntity;
 import com.platzi.pizza.service.PizzaService;
+import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,9 +21,10 @@ public class PizzaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PizzaEntity>> getAll() {
+    public ResponseEntity<Page<PizzaEntity>> getAll(@RequestParam(defaultValue = "0") int page,
+                                                    @RequestParam(defaultValue = "8") int elements) {
 
-        return ResponseEntity.ok(this.pizzaService.getAll());
+        return ResponseEntity.ok(this.pizzaService.getAll(page, elements));
     }
 
     @GetMapping("/{pizzaId}")
@@ -54,9 +56,12 @@ public class PizzaController {
     }
 
     @GetMapping("/available")
-    public ResponseEntity<List<PizzaEntity>> getAllAvailable() {
+    public ResponseEntity<Page<PizzaEntity>> getAllAvailable(@RequestParam(defaultValue = "0") int page,
+                                                             @RequestParam(defaultValue = "8") int elements,
+                                                             @RequestParam(defaultValue = "price") String sortBy,
+                                                             @RequestParam(defaultValue = "Asc") String sortDirection) {
         return ResponseEntity.ok(
-                this.pizzaService.getAvailablePizzas()
+                this.pizzaService.getAvailablePizzas(page, elements, sortBy, sortDirection)
         );
     }
 
@@ -74,11 +79,17 @@ public class PizzaController {
         );
     }
 
+    @GetMapping("/cheapest")
+    public  ResponseEntity<List<PizzaEntity>> findTopCheapestPizzas() {
+        return ResponseEntity.ok(
+                this.pizzaService.findTopCheapestPizzas()
+        );
+    }
+
     @GetMapping ("/available/not/description={description}")
     public ResponseEntity<List<PizzaEntity>> findAllDifferentByDescription(@PathVariable String description) {
         return ResponseEntity.ok(
                 this.pizzaService.findAllDifferentOfDescription(description)
         );
     }
-
 }
