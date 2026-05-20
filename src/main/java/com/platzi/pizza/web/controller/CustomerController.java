@@ -1,7 +1,7 @@
 package com.platzi.pizza.web.controller;
 
 import com.platzi.pizza.persistence.entity.CustomerEntity;
-import com.platzi.pizza.persistence.repository.CustomerService;
+import com.platzi.pizza.service.CustomerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

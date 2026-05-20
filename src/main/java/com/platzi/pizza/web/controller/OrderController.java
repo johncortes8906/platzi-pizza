@@ -1,6 +1,7 @@
 package com.platzi.pizza.web.controller;
 
 import com.platzi.pizza.persistence.entity.OrderEntity;
+import com.platzi.pizza.persistence.projections.OrderSummary;
 import com.platzi.pizza.service.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,6 +46,13 @@ public class OrderController {
     public ResponseEntity<List<OrderEntity>> findByCustomerId(@PathVariable String customerId) {
         return ResponseEntity.ok(
                 this.orderService.findByCustomerId(customerId)
+        );
+    }
+
+    @GetMapping("/summary/order_id={orderId}")
+    public ResponseEntity<OrderSummary> getOrderSummaryByOrderId(@PathVariable int orderId) {
+        return ResponseEntity.ok(
+                this.orderService.findOrderSummaryByOrderId(orderId)
         );
     }
 }

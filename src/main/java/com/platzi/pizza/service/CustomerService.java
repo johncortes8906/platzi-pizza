@@ -1,6 +1,7 @@
-package com.platzi.pizza.persistence.repository;
+package com.platzi.pizza.service;
 
 import com.platzi.pizza.persistence.entity.CustomerEntity;
+import com.platzi.pizza.persistence.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
