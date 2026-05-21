@@ -1,5 +1,6 @@
 package com.platzi.pizza.persistence.entity;
 
+import com.platzi.pizza.persistence.audits.AuditableEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,7 @@ import lombok.Setter;
 @Table(name = "customers")
 @Getter
 @Setter
-public class CustomerEntity {
+public class CustomerEntity extends AuditableEntity {
     @Id
     @Column(name = "customer_id", nullable = false, unique = true, length = 15)
     private String customerId;
