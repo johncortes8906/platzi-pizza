@@ -3,11 +3,9 @@ package com.platzi.pizza.web.controller;
 import com.platzi.pizza.persistence.entity.OrderEntity;
 import com.platzi.pizza.persistence.projections.OrderSummary;
 import com.platzi.pizza.service.OrderService;
+import com.platzi.pizza.service.dtos.AddRandomPizzaOrderSaleDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -54,5 +52,15 @@ public class OrderController {
         return ResponseEntity.ok(
                 this.orderService.findOrderSummaryByOrderId(orderId)
         );
+    }
+
+    @PostMapping("/sales/random")
+    public ResponseEntity<Void> addRandomSale(@RequestBody AddRandomPizzaOrderSaleDto addRandomPizzaOrderSaleDto) {
+        boolean isOrderSaved = this.orderService.addRandomSale(addRandomPizzaOrderSaleDto);
+        if (!isOrderSaved) {
+            return ResponseEntity.unprocessableContent().build();
+        }
+
+        return ResponseEntity.ok().build();
     }
 }
