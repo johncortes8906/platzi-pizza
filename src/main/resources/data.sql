@@ -64,3 +64,9 @@ VALUES
     (5, 1, 10, 0.5, 11.0),
     (5, 2, 12, 0.5, 9.5),
     (6, 1, 11, 1, 23);
+
+INSERT INTO `platzi_pizza`.`users` (`username`, `disabled`, `email`, `locked`, `password`)
+VALUES
+    ("admin", 0, "admin@platzi_pizza.com", 0, "admin123"),
+    ("customer", 0, "customer@platzi_pizza.com", 0, "customer123");
+
